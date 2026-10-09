@@ -1,0 +1,31 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# 前処理の中間生成物（PDFから scripts/build_index.py で再生成できるため追跡しない）
+# vectors.npy はチャンク数×1536次元で数十MB規模になりコミット差分が読めなくなるため除外。
+# chunks.json も同じ理由で除外し、代わりに再現手順を README に明記する。
+data/processed/*
+!data/processed/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Claude Codeのローカル権限設定（個人環境ごとの上書き。settings.jsonとは別扱い）
+.claude/settings.local.json
+
+# 社外に出さない指示文書・私的メモ
+instructions.md
+指示書.md
+notes/
+
+# 評価結果の手動判定用ワーキングファイル（作業中の私的コメントを含むため除外。
+# 確定版はeval_detail.csv本体に反映してコミットする）
+eval/results/*記入済*.csv

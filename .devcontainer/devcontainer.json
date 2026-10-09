@@ -1,0 +1,24 @@
+{
+  "name": "RAG_Monodukuri",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [8501],
+  "portsAttributes": {
+    "8501": {
+      "label": "Streamlit",
+      "onAutoForward": "notify"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ]
+    }
+  },
+  "postCreateCommand": "uv venv --python 3.12 && uv pip install -r requirements.txt && npm install -g @anthropic-ai/claude-code",
+  "remoteUser": "node"
+}
