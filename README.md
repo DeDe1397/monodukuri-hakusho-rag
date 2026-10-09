@@ -200,16 +200,19 @@ streamlit run app.py
 ### Streamlit Cloudへのデプロイ
 
 1. 本リポジトリをGitHubにpushする（`data/raw/*.pdf` はサイズが大きいがpublicな
-   政府文書なので追跡している。`data/processed/` は再生成できる中間ファイルなので
-   `.gitignore` で除外している）
+   政府文書なので追跡している。`data/processed/`（chunks.json 1.1MB・
+   vectors.npy 4.3MB）も、デプロイ直後からデモが動く状態にするためあえて
+   追跡している。PDFから再生成できる中間ファイルではあるが、実測で軽量
+   だったため、「追跡しない」より「動く状態で届ける」を優先した）
 2. Streamlit Cloudでアプリを作成し、Secretsに `OPENAI_API_KEY` と `APP_PASSWORD` を設定する
    （`APP_PASSWORD` はPublic公開時にOpenAI APIの課金を伴う呼び出しを誰でもできて
    しまうのを防ぐための簡易な共有パスワード。閲覧者ごとのメールアドレス管理を
    避けるため、Streamlit Cloudの個別アクセス制限ではなくアプリ側の1個の
    パスワードにしている。未設定だと誰でもアクセスできてしまうので必ず設定する）
-3. 初回起動時、インデックス未構築の画面が出るので「インデックスを構築する」ボタンを押す
-   （Streamlit Cloudはターミナルを持たないため、`scripts/build_index.py` と同じ処理を
-   アプリ内から1回だけ実行できるようにしている）
+3. デプロイ直後からチャット・メモ下書きの両タブが使える。索引ファイルを
+   誤って消した場合や、PDFを更新した場合は「インデックスを構築する」ボタンで
+   再構築できる（Streamlit Cloudはターミナルを持たないため、
+   `scripts/build_index.py` と同じ処理をアプリ内から実行できるようにしている）
 
 ### テストの実行
 

@@ -8,11 +8,10 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 
-# 前処理の中間生成物（PDFから scripts/build_index.py で再生成できるため追跡しない）
-# vectors.npy はチャンク数×1536次元で数十MB規模になりコミット差分が読めなくなるため除外。
-# chunks.json も同じ理由で除外し、代わりに再現手順を README に明記する。
-data/processed/*
-!data/processed/.gitkeep
+# 前処理の中間生成物（PDFから scripts/build_index.py で再生成できる）。
+# 実測では723チャンクでchunks.json 1.1MB・vectors.npy 4.3MBと軽量なため、
+# デプロイ直後からデモが動く状態にするためあえて追跡する
+# （除外していた以前の判断は「数十MB規模になる」という誤った見積りに基づいていた）。
 
 # OS / editor
 .DS_Store
