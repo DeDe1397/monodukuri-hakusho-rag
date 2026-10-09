@@ -176,7 +176,11 @@ PDF解析まで遡って根本原因を特定→修正→再検証）は、詳�
 ## セットアップ
 
 Docker前提（`.devcontainer/`）。Python 3.12固定（Streamlit Cloudとの互換性のため
-3.13以降は使わない）。
+3.13以降は使わない）。バージョン指定は`.python-version`（Streamlit Cloudが
+パッケージ管理に使う`uv`が読む）と`runtime.txt`（Heroku形式。他ホスティング向けの
+保険）の2箇所に書いている。`.python-version`が無いと、`uv`はデフォルトで
+最新のPythonを使ってしまい、`pillow`等のビルド済みパッケージが存在せず
+ビルドエラーになる（実際にStreamlit Cloudへの初回デプロイで発生し、追加した）。
 
 ```bash
 # 依存関係のインストール（devcontainer内は postCreateCommand で自動実行される）
